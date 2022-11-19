@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Understanding Neural Networks &#8212; My Jupyter Book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/writeup.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/writeup.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neural-network-motivation">
+     Neural Network Motivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-design">
+   Neural Network Design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivation">
+     Motivation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Understanding Neural Networks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neural-network-motivation">
+     Neural Network Motivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-design">
+   Neural Network Design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivation">
+     Motivation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="understanding-neural-networks">
+<h1>Understanding Neural Networks<a class="headerlink" href="#understanding-neural-networks" title="Permalink to this headline">#</a></h1>
+<p><strong>Author: Dominick DeCanio</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1">#path = &quot;C:/Users/Dom/Desktop/edu/MSDS/fall_22/ds_6030/project&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Every day we interact with the world through our senses. When we wake up, we see the sunlight of the morning, we hear the birds chirping, and taste hot coffee. We rely on these sensory inputs to inform our decisionmaking, though this process is often taken for granted. When you get out of bed to put on a fresh cup of coffee, you might not realize that you have already made various decisions before you’ve started the coffee maker: retrieving coffee grounds from your cabinet requires you to decide which cabinet to open, opening your bedroom door requires you to acknowledge your doorknob’s location on your door, and getting out of bed requires that you look at the clock to convince yourself that you <em>really</em> have to wake up now.</p>
+<p>Let’s work with a specific example:
+Consider this cat picture.</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg/800px-%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg" width=400 height=400 style="margin:auto"/><p>Source: <a class="reference external" href="https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg">https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:Топа_8.jpg</a></p>
+<p>When you look at this picture of the cat, you can see that it is cute. Just as before, this is a decision we collectively arrive at after processing the stimulus of this image, a sensory input. To better understand our the subliminal decision-making processes that are required to come to such a conclusion, let us proceed through a set of questions to investigate how this decision was formed.</p>
+<blockquote>
+<div><p><em>Why</em> do you think this cat is cute? <br>
+The cat’s fur coloring is pretty</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>Why</em> do you think the cat’s fur coloring is pretty? <br>
+The cat’s fur coloring is pretty because it has distinct colors of orange, white, and black.</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>Why</em> do these features make the cat’s fur coloring pretty? <br>
+The distinct nature of the colors allows them to be more vibrant</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>Why</em> does color vibrance make the cat’s fur coloring pretty? <br>
+Vibrant colors are pretty</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>Why</em> are vibrant colors * pretty? <br>
+Vibrant colors are pretty</p>
+</div></blockquote>
+<p>Notice that underlying our conclusion was a series of decisions and observations that were intertwinded to form a foundation for this conclusion. In this specific example, the root of the conclusion that the cat is cute is that vibrant colors are pretty, and therefor because the cat has vibrant colors in its fur, it is pretty too.</p>
+<p>It is easy to image, however, that each of these questions has multiple answers. Infrequently do base conclusions on one component of an observation. Rather, our responses to stimuli tend to utilize multiple components of the stimulus in our decision.</p>
+<p>Let’s proceed with the limitation that each question has 3 answers, and see what happens when we apply this assumption to the example above. Of course in reality such questions might have greater or less than 3 answers, and some answers might be the same.</p>
+<blockquote>
+<div><p><em>Why</em> do you think this cat is cute? <br></p>
+<ol class="simple">
+<li><p>The cat’s fur coloring is pretty</p></li>
+</ol>
+</div></blockquote>
+<ol class="simple">
+<li><p>The cat looks surprised</p></li>
+<li><p>The cat’s nose is cute</p></li>
+</ol>
+<blockquote>
+<div><p><em>Why</em> do you think the cat’s fur coloring is pretty? <br></p>
+<ol class="simple">
+<li><p>The cat’s fur coloring is pretty
+1. The cat’s fur coloring is pretty because the colors are distinct
+2. The cat’s fur colors form a cool pattern
+3. The cat’s fur has multiple colors</p></li>
+</ol>
+</div></blockquote>
+<ol class="simple">
+<li><p>The cat looks surprised</p></li>
+<li><p>The cat’s nose is cute</p></li>
+</ol>
+<blockquote>
+<div><p><em>Why</em> do these features make the cat’s fur coloring pretty? <br></p>
+<ol class="simple">
+<li><p>The cat’s fur coloring is pretty
+1. The cat’s fur coloring is pretty because the colors are distinct
+1. The colors are vibrant
+2. The colors contrast well
+3. Each color is rich
+2. The cat’s fur colors form a cool pattern
+3. The cat’s fur has multiple colors</p></li>
+</ol>
+</div></blockquote>
+<ol class="simple">
+<li><p>The cat looks surprised</p></li>
+<li><p>The cat’s nose is cute</p></li>
+</ol>
+<p>This representation of the problem is getting a little hard to read - and there are many questions left unaswered because we have not answered all questions to the same depth. To understand the problem more concisely, we can rewrite these answers in tree diagram, with each box representing an answer and each line representing a question.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#&lt;img src=&quot;images/cat_diagram_1.png&quot; width=10000 height=1000 style=&quot;margin:auto&quot;/&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/cat_diagram_1.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/cat_diagram_1.png" style="width: 1000px;" /></a>
+<p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>We <em>chose</em> to ask 3 questions of every conclusion we came to when deciding that “this cat is cute”. This is an arbitrary choice, and thus we might ask an arbitrary number of questions of such a conclusion, resulting in an arbitrary number of variables.</p>
+</div>
+<section id="neural-network-motivation">
+<h3>Neural Network Motivation<a class="headerlink" href="#neural-network-motivation" title="Permalink to this headline">#</a></h3>
+<p>To create models that understand complex data such as images, we must mimic this structure of decomoposing the input into it’s components, and analyzing the interactions between these subparts before combining them to reach a conclusion. Generally, we might choose an arbitrary number of supporting variables to define any predictor variable in the feature space, dependent on the specific research question. Let’s introduce a simple example, which we will follow throughout our explanation of neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#&lt;img src=&quot;&quot; width=400 height=400 style=&quot;margin:auto&quot;/&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="topic">
+<p class="topic-title">Example</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/nn_diag_2.png" style="width: 1000px;" /></a>
+<p>A snack packet can contain two types of snack:</p>
+<ul class="simple">
+<li><p>pretzel</p></li>
+<li><p>cheeto</p></li>
+</ul>
+<p>Each of these snacks are, in turn, composed of two ingredients: <br></p>
+<ul class="simple">
+<li><p>wheat</p></li>
+<li><p>corn</p></li>
+</ul>
+<p>We might then express these relationships through the following variables and equations:</p>
+<p><span class="math notranslate nohighlight">\(z\)</span> = snack packets <br>
+<span class="math notranslate nohighlight">\(y\)</span>: snacks <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = pretzel <br>
+<span class="math notranslate nohighlight">\(y_{2}\)</span> = cheetos</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(x\)</span>: ingredients <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(x_{1,1}\)</span> = wheat <br>
+<span class="math notranslate nohighlight">\(x_{1,2}\)</span> = salt <br>
+<span class="math notranslate nohighlight">\(x_{2,1}\)</span> = corn <br>
+<span class="math notranslate nohighlight">\(x_{2,2}\)</span> = cheese <br></p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\( z = y_{1} + y_{2} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = x_{1,1} + x_{1,2} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = x_{2,1} + x_{2,2} \)</span> <br></p>
+</div>
+<p><a class="reference external" href="https://us.123rf.com/450wm/julialemba/julialemba2207/julialemba220700100/189525497-snack-chips-are-poured-in-the-package-food-packaging-template-vector-illustration-isolated-on-white-.jpg?ver=6">https://us.123rf.com/450wm/julialemba/julialemba2207/julialemba220700100/189525497-snack-chips-are-poured-in-the-package-food-packaging-template-vector-illustration-isolated-on-white-.jpg?ver=6</a></p>
+<p>You might then think to yourself: <br>
+Why don’t we simply use another modeling framework such as ordinary least squares (OLS)?</p>
+<p>An <strong>artificial neural network (ANN)</strong> is a model which mimics the human brain on some level in order to process a complex input. The similarities between brain models and ANNs diverged soon after ANNs were created, and the architectures of modern ANNs do not resemble contemporary understanding of the brain. As these networks developed, and the differences between biological and artificial neural networks became well established, the convention of specifying the network as “artificial” became less necessary. Now, an artificial neural networks is known as simply a <strong>neural network (NN)</strong> and will be referred to as such throughout this article.</p>
+<p>There are many good resourses that describe neural network architectures, and the applications thereof. Because neural networks are difficult to interpret, many resources do not cover neural network interpretation, which would admittedly be of limitted use to most readers. This article will develop an understanding of neural networks that:</p>
+<ul class="simple">
+<li><p>provides intuition of neural network architecture</p></li>
+<li><p>informs the reader of pitfalls of neural network interpretation</p></li>
+<li><p>is rooted in the underlying mathematics of these networks</p></li>
+</ul>
+<p>The intended audience of this article is a graduate student, advanced undergraduate student or independent learner who has some familiarity with linear algebra, statistics, and neural network architecture but lacks an intuitive understanding of these networks.</p>
+</section>
+</section>
+<section id="neural-network-design">
+<h2>Neural Network Design<a class="headerlink" href="#neural-network-design" title="Permalink to this headline">#</a></h2>
+<p>The following diagram shows a single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.</p>
+<img src="images/nn_diag_1.jpg" width=400 height=400 style="margin:auto"/><p>If you have worked with neural networks before, you have almost certainly seen a diagram like this used to explain what is going on underneath the hood. The aim of the following sections is to systematically break down this diagram using examples and interpretations to form an intuitive understanding of what these bubbles represent.</p>
+<section id="motivation">
+<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h3>
+<p>We have established that in order to model a complex decision process such as image recognition it is essential to decompose the problem into sub-problems to find suitable answers and compose a solution.</p>
+<p>In your usage of statistics thus far you have learned about a variety of methods through which you can model results, such as ordinary least squares. Why can’t we simply use ordinary least squares, with the variables equal to each of the “sub-problems” (characteristics) we investigate?</p>
+<p>Let’s continue with this premise and understand the results through an example.</p>
+<p>Ordinary Least Squares (OLS) equation:<br>
+<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x + \epsilon \)</span></p>
+<p>Remember that in an OLS equation, each predictor variable (x) has an estimated coefficient that can be interpretted using the units of the predictor variable and target variable (y) to interpret the impact of that input on the prediction of the target variable. We will use this property of OLS to connect the interpretation of variable importance to usage of OLS to analyse decomposed predictors, which will illustrate the necessity of neural network architectures for the analysis of nested predictors.</p>
+<p>Let’s return to the cat example. Recall the tree diagram of our “predictor variables” that led us to the conclusion that “This cat is cute”:</p>
+<img src="images/cat_diagram_1.png" width=500 height=500 style="margin:auto"/><p>We will use this diagram to inform our OLS regression model which will predict a cat’s “cuteness score” based on various predictor variables. Below is a section of the diagram which is completed and will serve as the basis for our example.</p>
+<img src="images/cat_diagram_2.png" width=500 height=500 style="margin:auto"/><p>In order to understand this image classification without diving into the root of convolutional neural networks (CNN’s) and the intricacies of CNN network design in order to explain how features are derived from the picture in the first place, we will instead understand this image as if the image has an associated “score” for each variable we identify. This will simplify our problem immensely by removing the necessity to derive these variable “scores”, and lends itself to the OLS interpretation we are looking for.</p>
+<p>For the diagram above, we interpret the boxes to represent random variables. Forming a linear equation using the highest two layers of the tree diagram, we generate the following equation:</p>
+<blockquote>
+<div><p><strong>Cuteness Score = Fur Color Score  + Surprised Expression Score</strong></p>
+</div></blockquote>
+<table>
+  <tr>
+    <th>Variable</th>
+    <th>Data Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Cuteness Score</td>
+    <td>float between 0 and 1</td>
+    <td>The value 1 represents the "cutest" a cat could possibly be, and <br>the value 0 represents the "least cute" a cat could possibly be.</td>
+  </tr>
+  <tr>
+    <td>Surprised Expression Score</td>
+    <td>float between 0 and 1</td>
+    <td>The value 1 represents the "most surprised" a cat could possibly look, and <br>the value 0 represents the "least surprised" a cat could possibly look.</td>
+  </tr>
+    <tr>
+    <td>Fur Color Score</td>
+    <td>float between 0 and 1</td>
+    <td>The value 1 represents the "best fur color" a cat could possibly have, and <br>the value 0 represents the "worst fur color" a cat could possibly have.</td>
+  </tr>
+</table> <p>The variables above may be thought of as aggregate scores combining physical measurements and human psychology. For example: the size of the cat’s eyes might be measured by the computer through understanding the eye as some eliptical shape, and it’s “wide-ness” might be the difference between the surface area formed by this eplipse and the surface area created by a circle of the same diameter. This, in turn, impacts some computation which weights the various components of</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># maybe do some paper planning so i&#39;m not stumbling over myself in the writing!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NEED FEEDBACK ON THE DIAGRAMS! DO I NEED TO REDRAW THEM ALL????</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How do I utilize the sources?</span>
+<span class="c1"># - cannot directly quote, so how do I represent that I have sourced/verified principles with a textbook?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cat Example using OLS:<br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\( y \)</span> = “cuteness” rating <br>
+<span class="math notranslate nohighlight">\( \beta_{0} \)</span> = estimated cuteness <br>
+<span class="math notranslate nohighlight">\( \beta_{1} \)</span> = est</p>
+</div></blockquote>
+<p>Or, More generally: <br>
+<span class="math notranslate nohighlight">\( a = a_{1} + a_{2} + a_{3} \)</span> <br>
+<span class="math notranslate nohighlight">\( b = b_{1} + b_{2} + b_{3} \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{a} = \beta_{a0} + \beta_{a1}a_{1} + \beta_{a2}a_{2} + \beta_{a3}a_{3} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{b} = \beta_{b0} + \beta_{b1}b_{1} + \beta_{b2}b_{2} + \beta_{b3}b_{3} \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{ya}y_{a} + \beta_{yb}y_{b} \)</span> <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{ya}(\beta_{a0} + \beta_{a1}a_{1} + \beta_{a2}a_{2} + \beta_{a3}a_{3}) + \beta_{yb}(\beta_{b0} + \beta_{b1}b_{1} + \beta_{b2}b_{2} + \beta_{b3}b_{3}) \)</span></p>
+<p>We can see that this can be rewritten: <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{a0} + \beta_{b0} + \beta_{ya}a(\beta_{a1} + \beta_{a2} + \beta_{a3}) + \beta_{yb}b(\beta_{b1} + \beta_{b2} + \beta_{b3}) \)</span> <br></p>
+<p>We can rename: <br>
+<span class="math notranslate nohighlight">\( \beta_{a} = \beta_{a1} + \beta_{a2} + \beta_{a3} \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{b} = \beta_{b1} + \beta_{b2} + \beta_{b3} \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{0} = \beta_{y0} + \beta_{a0} + \beta_{b0} \)</span></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{0} + \beta_{a}a + \beta_{b}b\)</span></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
