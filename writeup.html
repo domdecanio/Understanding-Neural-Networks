@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Understanding Neural Networks &#8212; My Jupyter Book</title>
+    <title>Understanding Neural Networks &#8212; Surfing the Data Pipeline with Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -234,6 +234,28 @@ title="Print to PDF"
      Neural Network Motivation
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#image-all-mixed">
+       image (all mixed)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pile-of-pretzels-corn-chips">
+       pile of pretzels / corn chips
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -242,8 +264,25 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation
+    <a class="reference internal nav-link" href="#input-layer">
+     Input Layer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#inside-snack-example-admonition">
+       inside snack example admonition
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hidden-layer">
+     Hidden Layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output-layer">
+     Output Layer
     </a>
    </li>
   </ul>
@@ -277,6 +316,28 @@ title="Print to PDF"
      Neural Network Motivation
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#image-all-mixed">
+       image (all mixed)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pile-of-pretzels-corn-chips">
+       pile of pretzels / corn chips
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -285,8 +346,25 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#motivation">
-     Motivation
+    <a class="reference internal nav-link" href="#input-layer">
+     Input Layer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#inside-snack-example-admonition">
+       inside snack example admonition
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hidden-layer">
+     Hidden Layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output-layer">
+     Output Layer
     </a>
    </li>
   </ul>
@@ -370,79 +448,70 @@ Vibrant colors are pretty</p>
 <blockquote>
 <div><p><em>Why</em> do these features make the cat’s fur coloring pretty? <br></p>
 <ol class="simple">
-<li><p>The cat’s fur coloring is pretty
-1. The cat’s fur coloring is pretty because the colors are distinct
-1. The colors are vibrant
-2. The colors contrast well
-3. Each color is rich
-2. The cat’s fur colors form a cool pattern
-3. The cat’s fur has multiple colors</p></li>
-</ol>
-</div></blockquote>
+<li><p>The cat’s fur coloring is pretty</p>
 <ol class="simple">
+<li><p>The cat’s fur coloring is pretty because the colors are distinct</p>
+<ol class="simple">
+<li><p>The colors are vibrant</p></li>
+<li><p>The colors contrast well</p></li>
+<li><p>Each color is rich</p></li>
+</ol>
+</li>
+<li><p>The cat’s fur colors form a cool pattern</p></li>
+<li><p>The cat’s fur has multiple colors</p></li>
+</ol>
+</li>
 <li><p>The cat looks surprised</p></li>
 <li><p>The cat’s nose is cute</p></li>
 </ol>
+</div></blockquote>
 <p>This representation of the problem is getting a little hard to read - and there are many questions left unaswered because we have not answered all questions to the same depth. To understand the problem more concisely, we can rewrite these answers in tree diagram, with each box representing an answer and each line representing a question.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#&lt;img src=&quot;images/cat_diagram_1.png&quot; width=10000 height=1000 style=&quot;margin:auto&quot;/&gt;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/cat_diagram_1.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/cat_diagram_1.png" style="width: 1000px;" /></a>
+<img src="images/cat_diagram_1.png" width=10000 height=1000 style="margin:auto"/><a class="bg-primary mb-1 reference internal image-reference" href="images/cat_diagram_1.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/cat_diagram_1.png" style="width: 1000px;" /></a>
 <p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
-<p>We <em>chose</em> to ask 3 questions of every conclusion we came to when deciding that “this cat is cute”. This is an arbitrary choice, and thus we might ask an arbitrary number of questions of such a conclusion, resulting in an arbitrary number of variables.</p>
+<p>We <em>chose</em> to ask 3 questions of every conclusion we came to when deciding that “this cat is cute”. This is an arbitrary choice, and thus we might ask an arbitrary number of questions of such a conclusion, resulting in an arbitrarily large number of variables.</p>
 </div>
+<p>Data such as images and strings of words are commonly callled <strong>unstructured data</strong> because their most granular level of information is unlabeled. In an image, this “most granular level of information” is a pixel. Although this pixel has one or more values representing the hue of RGB that the pixel shows, the <em>meaning</em> or <em>value</em> of this pixel’s hue is not labeled-instead, it must be infered from the significance of that pixel’s color in the context of its location in the overall image.</p>
+<p>Because a single “input” of unstructured data (e.g. an image) contains many sub-components (e.g. pixels) that must be analyzed in conjunction with one another, we</p>
 <section id="neural-network-motivation">
 <h3>Neural Network Motivation<a class="headerlink" href="#neural-network-motivation" title="Permalink to this headline">#</a></h3>
-<p>To create models that understand complex data such as images, we must mimic this structure of decomoposing the input into it’s components, and analyzing the interactions between these subparts before combining them to reach a conclusion. Generally, we might choose an arbitrary number of supporting variables to define any predictor variable in the feature space, dependent on the specific research question. Let’s introduce a simple example, which we will follow throughout our explanation of neural networks.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#&lt;img src=&quot;&quot; width=400 height=400 style=&quot;margin:auto&quot;/&gt;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="topic">
-<p class="topic-title">Example</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/nn_diag_2.png" style="width: 1000px;" /></a>
-<p>A snack packet can contain two types of snack:</p>
-<ul class="simple">
-<li><p>pretzel</p></li>
-<li><p>cheeto</p></li>
-</ul>
-<p>Each of these snacks are, in turn, composed of two ingredients: <br></p>
-<ul class="simple">
-<li><p>wheat</p></li>
-<li><p>corn</p></li>
-</ul>
-<p>We might then express these relationships through the following variables and equations:</p>
-<p><span class="math notranslate nohighlight">\(z\)</span> = snack packets <br>
-<span class="math notranslate nohighlight">\(y\)</span>: snacks <br></p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = pretzel <br>
-<span class="math notranslate nohighlight">\(y_{2}\)</span> = cheetos</p>
-</div></blockquote>
-<p><span class="math notranslate nohighlight">\(x\)</span>: ingredients <br></p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(x_{1,1}\)</span> = wheat <br>
-<span class="math notranslate nohighlight">\(x_{1,2}\)</span> = salt <br>
-<span class="math notranslate nohighlight">\(x_{2,1}\)</span> = corn <br>
-<span class="math notranslate nohighlight">\(x_{2,2}\)</span> = cheese <br></p>
-</div></blockquote>
-<p><span class="math notranslate nohighlight">\( z = y_{1} + y_{2} \)</span> <br>
-<span class="math notranslate nohighlight">\( y_{1} = x_{1,1} + x_{1,2} \)</span> <br>
-<span class="math notranslate nohighlight">\( y_{2} = x_{2,1} + x_{2,2} \)</span> <br></p>
-</div>
-<p><a class="reference external" href="https://us.123rf.com/450wm/julialemba/julialemba2207/julialemba220700100/189525497-snack-chips-are-poured-in-the-package-food-packaging-template-vector-illustration-isolated-on-white-.jpg?ver=6">https://us.123rf.com/450wm/julialemba/julialemba2207/julialemba220700100/189525497-snack-chips-are-poured-in-the-package-food-packaging-template-vector-illustration-isolated-on-white-.jpg?ver=6</a></p>
-<p>You might then think to yourself: <br>
-Why don’t we simply use another modeling framework such as ordinary least squares (OLS)?</p>
-<p>An <strong>artificial neural network (ANN)</strong> is a model which mimics the human brain on some level in order to process a complex input. The similarities between brain models and ANNs diverged soon after ANNs were created, and the architectures of modern ANNs do not resemble contemporary understanding of the brain. As these networks developed, and the differences between biological and artificial neural networks became well established, the convention of specifying the network as “artificial” became less necessary. Now, an artificial neural networks is known as simply a <strong>neural network (NN)</strong> and will be referred to as such throughout this article.</p>
-<p>There are many good resourses that describe neural network architectures, and the applications thereof. Because neural networks are difficult to interpret, many resources do not cover neural network interpretation, which would admittedly be of limitted use to most readers. This article will develop an understanding of neural networks that:</p>
+<p>To create models that understand unstructured data a such as images, and other complex data, we must mimic this structure of decomoposing the input into it’s components and analyzing the interactions between these subparts (using many distinc linear combinations) before combining them to reach a conclusion. Generally, we might choose an arbitrary number of supporting variables to define any predictor variable in the feature space, dependent on the specific research question.</p>
+<p>The point of this decomposition is to use the different coefficient combinations to understand the inputs in different ways. These various combinations of coefficients allow us to isolate clusters oof inputs based on different characteristics of the features.</p>
+<p>We will work through this concept generally before introducing an example later in this section. In the following equations, focus on the coefficients and do not be too concerned with the interpretations of the variables.</p>
+<p><strong>Generally:</strong> <br>
+<span class="math notranslate nohighlight">\( x = x_{1} + x_{2} \)</span>   (inputs) <br></p>
+<p><span class="math notranslate nohighlight">\( y_{1} = \beta_{y_{1},0} + \beta_{y_{1},1}x_{1} + \beta_{y_{1},2}x_{2} \)</span>  (linear combination 1) <br>
+<span class="math notranslate nohighlight">\( y_{2} = \beta_{y_{2},0} + \beta_{y_{2},1}x_{1} + \beta_{y_{2},2}x_{2} \)</span>  (linear combination 2) <br></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} \)</span> (conclusion)
+<br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y_{1}}(\beta_{y_{1},0} + \beta_{y_{1},1}x_{1} + \beta_{y_{1},2}x_{2}) + \beta_{y_{2}}(\beta_{y_{2},0} + \beta_{y_{2},1}x_{1} + \beta_{y_{2},2}x_{2}) \)</span>  (expanded conclusion)</p>
+<p>As we can see, the presence of two (2) distinct linear combinations of the subparts of the input allows us to analyze the input in tow different ways simultaneously. Because these linear combinations come together to form the overall conclusion statement, we can also weight these linear combinations based on their predictive power in determining the conclusion.</p>
+<p>Thus, both the weights of the inputs within these linear combinations (<span class="math notranslate nohighlight">\( \beta_{y_{1},0} , \beta_{y_{1},1}, \beta_{y_{1},2},  \beta_{y_{2},0} , \beta_{y_{2},1} , \beta_{y_{2},2} \)</span>) and the weights of the linear combinations on the conclusion (<span class="math notranslate nohighlight">\( \beta_{y_{1}} , \beta_{y_{2}} \)</span>) have different meanings and are independently influential in the conclusion. If preserved, these terms allow us to identify clusters of observations based on various sub-components of the inputs because the different linear combinations draw out different characteristics of these sub-components. Because of this, we want to preserve the independece of these terms in order to preserve the deepest level of this analysis.</p>
+<p>However! These coefficients will collapse. <br>
+(distributing the <span class="math notranslate nohighlight">\(\beta_{y_{1}}\)</span> and <span class="math notranslate nohighlight">\(\beta_{y_{2}}\)</span> coefficients) <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + (\beta_{y_{1}}\beta_{y_{1},0} + \beta_{y_{1}}\beta_{y_{1},1}x_{1} + \beta_{y_{1}}\beta_{y_{1},2}x_{2}) + (\beta_{y_{2}}\beta_{y_{2},0} + \beta_{y_{2}}\beta_{y_{2},1}x_{1} + \beta_{y_{2}}\beta_{y_{2},2}x_{2}) \)</span></p>
+<p>We can see that this can be rewritten: <br>
+<span class="math notranslate nohighlight">\( z = (\beta_{y0} + \beta_{y_{1}}\beta_{y_{1},0} + \beta_{y_{2}}\beta_{y_{2},0}) + (\beta_{y_{1}}\beta_{y_{1},1}x_{1} + \beta_{y_{1}}\beta_{y_{1},2}x_{2}) + (\beta_{y_{2}}\beta_{y_{2},1}x_{1} + \beta_{y_{2}}\beta_{y_{2},2}x_{2}) \)</span></p>
+<p>Grouping based on the input variables: <br>
+<span class="math notranslate nohighlight">\( z = (\beta_{y0} + \beta_{y_{1}}\beta_{y_{1},0} + \beta_{y_{2}}\beta_{y_{2},0}) + (\beta_{y_{1}}\beta_{y_{1},1}x_{1} + \beta_{y_{2}}\beta_{y_{2},1}x_{1}) + (\beta_{y_{1}}\beta_{y_{1},2}x_{2} + \beta_{y_{2}}\beta_{y_{2},2}x_{2}) \)</span></p>
+<p>Now  we will pull out the variables <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>: <br>
+<span class="math notranslate nohighlight">\( z = (\beta_{y0} + \beta_{y_{1}}\beta_{y_{1},0} + \beta_{y_{2}}\beta_{y_{2},0}) + x_{1}(\beta_{y_{1}}\beta_{y_{1},1} + \beta_{y_{2}}\beta_{y_{2},1}) + x_{2}(\beta_{y_{1}}\beta_{y_{1},2} + \beta_{y_{2}}\beta_{y_{2},2}) \)</span></p>
+<p>We can rename: <br>
+<span class="math notranslate nohighlight">\( \beta_{0} = \beta_{y0} + \beta_{y_{1}}\beta_{y_{1},0} + \beta_{y_{2}}\beta_{y_{2},0} \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x_{1}} = \beta_{y_{1}}\beta_{y_{1},1} + \beta_{y_{2}}\beta_{y_{2},1} \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x_{2}} = \beta_{y_{1}}\beta_{y_{1},2} + \beta_{y_{2}}\beta_{y_{2},2} \)</span> <br></p>
+<p>Therefore: <br>
+<span class="math notranslate nohighlight">\( z = \beta_{0} + \beta_{x_{1}}x_{1} + \beta_{x_{2}}x_{2}\)</span></p>
+<p>Wait! What happened?</p>
+<p>We can see that our set of 8 independently influential coefficients have been reduced to only 3. This fundementally destroys our ability to form clusters based on multiple sub-features because we are unable to analyze the inputs in multiple (disparate) ways.</p>
+<p>How can we prevent these coefficients from collapsing into fewer-less granular-coefficients?</p>
+</section>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
+<p>An <strong>artificial neural network (ANN)</strong> is a model which mimics the human brain (to some degree) in order to process complex inputs. The key to a functional artificial neural network is the introduction of nonlinearity in order to preserve the information added though creating multiple linear combinations of the inputs using different coefficients. This nonlinearity prevents the linear equations from collapsing, though it adds complexity that makes interpretation of the network more difficult.</p>
+<p>These models rely on linear combinations of inputs, and nonlinear transformations of these funcitons, to process and make conclusions on complex inputs. The similarities between brain models and ANNs diverged soon after ANNs were created, and the architectures of modern ANNs do not resemble contemporary understanding of the brain. As these networks developed, and the differences between biological and artificial neural networks became well established, the convention of specifying the network as “artificial” became less necessary. Now, an artificial neural networks is known as simply a <strong>neural network (NN)</strong> and will be referred to as such throughout this article.</p>
+<p>There are many good resourses that describe neural network architectures and their applications. Neural networks are difficult to interpret. Because of this, it seems, many resources do not cover the foundations of neural network interpretation as the limited applicability of this topic may make it a less interesting and useful to readers. The aim of this article is to explore the foundations of neural networks that:</p>
 <ul class="simple">
 <li><p>provides intuition of neural network architecture</p></li>
 <li><p>informs the reader of pitfalls of neural network interpretation</p></li>
@@ -450,90 +519,172 @@ Why don’t we simply use another modeling framework such as ordinary least squa
 </ul>
 <p>The intended audience of this article is a graduate student, advanced undergraduate student or independent learner who has some familiarity with linear algebra, statistics, and neural network architecture but lacks an intuitive understanding of these networks.</p>
 </section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h3>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>We live in a world where there are two types of snacks (pretzels and corn chips) which are each composed of wheat and corn.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/nn_diag_2.png" style="width: 1000px;" /></a>
+<p>Each pretzel is made using 4 wheat and 1 corn, and each corn chip is made using 1 wheat and 4 corn.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>snack</p></th>
+<th class="head"><p>wheat</p></th>
+<th class="text-align:right head"><p>corn</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>pretzel</p></td>
+<td><p>4</p></td>
+<td class="text-align:right"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>corn chip</p></td>
+<td><p>1</p></td>
+<td class="text-align:right"><p>4</p></td>
+</tr>
+</tbody>
+</table>
+<p>In this world there are two types of snack packets; one containing only pretzels, and the other containing only corn chips.</p>
+</div>
+<p>You might then think to yourself: <br>
+Why don’t we simply use another modeling framework such as ordinary least squares (OLS)? Can’t OLS understand the imacts of different predictors on the predicted value?</p>
+<p>Sadly, no.</p>
+<p>When a linear function is used to evaluate a set of features that are linearly related, the lower level features are obscured as the greater linear function collapses into a simplified linear function. We will use the snacks example to illustrate how a linear approach to a decomposition of features collapses, rendering the added data of these granular features useless.</p>
+<p>Let’s begin by recalling the Ordinary Least Squares formula for a simple linear regression.</p>
+<p>Ordinary Least Squares (OLS) equation:<br>
+<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x + \epsilon \)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>We move directly to the solution of the ordinary least squares approach. In doing so we have bruhsed some complexity under the rug, but we can move forward without defining this ordinary least squares foruma thoroughly because we only require that the resulting formula is a linear combination of its features to illustrate this point clearly. We do not require Best Linear Unbiased Estimator (BLUE) properties in this situation.</p>
+</div>
+<p>We will now apply the OLS framework to the snack example to see how a linear combination of linear features collapses. First, we will define the OLS regression model for understanding</p>
+<section id="image-all-mixed">
+<h4>image (all mixed)<a class="headerlink" href="#image-all-mixed" title="Permalink to this headline">#</a></h4>
+<p>Representing this example using the OLS approach, our two input variables will be: <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(x_{1}\)</span> = wheat <br>
+<span class="math notranslate nohighlight">\(x_{2}\)</span> = corn</p>
+</div></blockquote>
+<p>Which yeilds: <br>
+<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \epsilon_{x} \)</span></p>
+<p>Let’s pause for a moment to understand what this equation <em>means</em>. We saw from the definition of this example that a snack is comprised of inputs wheat and corn. When applied in the correct ratios these inputs can produce snacks of two distinct varieties.</p>
+<p>To undersand this equation we must first understand the context of its prediction. The predicted variable is a <strong>snack score</strong>. This score is a way for us to differentiate between the two snack types, and it is unitless because it defines neither the type of ingredients that comprise it, nor the type of snack that it represents. Because we are taking units of the ingredients as inputs (one gram of wheat/corn) the coefficients to these variables may be thought of as modifying the importance of the ingredient on the snack score. The intercept term can be interpretted as the base snack score when there are zero grams of wheat and zero grams of corn present, and the error term (epsilon) represents the random variation of snack score caused by variations in the measurement of the ingredients.</p>
+<p>Although the snack score does not difinitively identify a specific snack, snacks of the same type will have the same snack score. If we relax the assumption that all snacks of the same type will have the exact same quanitity of each ingredient, we will still see that the the quantities of each ingredient will be similar within each snack type. In both of these situations, we will input the ingredients and output snack scores which can be clustered based on the type of of the underlying snack.</p>
+<p>We might then choose a threshold value between these clusters to transform a predicted snack score into a prediction of the class to which the underlying snack belongs. Let’s work through the given OLS example: <br>
+<span class="math notranslate nohighlight">\( y \)</span>  = snack score <br>
+<span class="math notranslate nohighlight">\( \beta_{x0} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x1} = -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x2} = 0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{x} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y = \beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x} \)</span> <br>
+<span class="math notranslate nohighlight">\( y = 0 + -.5x_{1} + .5x_{2} + 0 \)</span></p>
+<p>One Pretzel: <br>
+<span class="math notranslate nohighlight">\( y = 0 + -0.5x_{1} + 0.5x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y = 0 + -0.5(4) + 0.5(1) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y =  -2 + .5 \)</span> <br>
+<span class="math notranslate nohighlight">\( y = -1.5 \)</span> <br></p>
+<p>One Corn Chip: <br>
+<span class="math notranslate nohighlight">\( y = 0 + -0.5x_{1} + 0.5x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y = 0 + -0.5(1) + 0.5(4) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y =  -.5 + 2 \)</span> <br>
+<span class="math notranslate nohighlight">\( y = 1.5 \)</span> <br></p>
+<p>Given these snack scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack type based on its ingredients we will classify the snack as a “pretzel” when the snack score is less than zero and as a “corn chip” when the snack score is greater than zero.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The values of <span class="math notranslate nohighlight">\(\beta_{0}\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> are not influential here beacuse we are interested in the difference of the snack score (<span class="math notranslate nohighlight">\(y\)</span>) between observations of pretzels and corn chips. Therefore, the intercept and error term can be any values, as they will simply shift the center of these clusters.</p>
+<p>The values of the coefficients of <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> must have different signs, otherwise the snack score (<span class="math notranslate nohighlight">\(y\)</span>) of both pretzels and corn chips will be the same. This phenomena occurs because each snack has only teo ingredients and the same total amount of ingredients. Therefore only on of <span class="math notranslate nohighlight">\(x_{1}\)</span> or <span class="math notranslate nohighlight">\(x_{2}\)</span> is necessary to determine the difference between clusters because the quanitity of one ingredient describes the proportion of the snack that is comprised of both.</p>
+</div>
+</section>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>Our question of interest is: “What type of snack packet do we have?” <br>
+In order to answer this question using the OLS approach, we will set a threshold value and predict using a base case. To maintain a grounding in the interpretation of this approach, we will expand on the approach’s interpretation as it develops.</p>
+<p>Recall that this example begins with a pile of ingredients</p>
+</div>
+<p>Now that we have described the application of OLS to the snack problem for classifying each snack, we can build on this foundation to desccribe the full problem. We will proceed by describing the model that will use this OLS classification framework to make a prediction of the snack packet type rather than the snack type.</p>
+<section id="pile-of-pretzels-corn-chips">
+<h4>pile of pretzels / corn chips<a class="headerlink" href="#pile-of-pretzels-corn-chips" title="Permalink to this headline">#</a></h4>
+<p>Representing this example using the OLS approach, our two input variables will be: <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = pretzel <br>
+<span class="math notranslate nohighlight">\(y_{2}\)</span> = corn chip</p>
+</div></blockquote>
+<p>Which yeilds: <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span></p>
+<p>We will proceed by extending the snack score concept to a <strong>snack packet score</strong>, which we will use to describe clusters of snacks within a snack packet. This score will not define a snack packet class, but snack packets of the same type will form clusters which we can then identify using our prior knowledge of the snack packet compositions. Then we will choose a threshold value between these clusters to transform predicted snack scores into a prediction of the class to which the underlying snack packet belongs. The error term at this level is denoted as <span class="math notranslate nohighlight">\(\psi\)</span> for notational clarity.</p>
+<p>We will mirror the structure of the snack score OLS example. The only difference between them is that we are now using snack quantities as our input and packet score as our output. Let’s work through the OLS example: <br>
+<span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br>
+<span class="math notranslate nohighlight">\( \beta_{y0} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y1} = -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y2} = 0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0 + -.5y_{1} + .5y_{2} + 0 \)</span></p>
+<p>One Pretzel Packet: <br>
+<span class="math notranslate nohighlight">\( z = 0 + -0.5y_{1} + 0.5y_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0 + -0.5(10) + 0.5(0) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = -5 + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = -5 \)</span> <br></p>
+<p>One Corn Chip Packet: <br>
+<span class="math notranslate nohighlight">\( z = 0 + -0.5y_{1} + 0.5y_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0 + -0.5(0) + 0.5(10) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0 + 5 \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 5 \)</span> <br></p>
+<p>Given these snack packet scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack packet type based on its ingredients we will classify the snack packet as a “pretzel packet” when the snack score is less than zero and as a “corn chip packet” when the snack packet score is greater than zero.</p>
+</section>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>We have determined clusters of snacks in order to predict what type of snack is present. Now that we have predicted which snack is present, we want to make a decision on the type of snack packet we have using this information.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The <strong>snack score</strong> and <strong>snack packet score</strong> are two distinct levels of the same problem.</p>
+</div>
+<p>Now that we have defined the snack example problem in terms of a snack score and snack packet score, we will try to combine these approaches to form a decomposition approach that uses OLS to predict a snack packet directly from the ingredients we take as inputs.</p>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p><strong>Recall</strong> <br>
+Ordinary Least Squares (OLS) equation:<br>
+<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x + \epsilon \)</span></p>
+<p>Snack Score: <br>
+<span class="math notranslate nohighlight">\( y = \beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x} \)</span> <br></p>
+<p>Snack Packet Score: <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span></p>
+<p>Combined approach: <br>
+<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}(\beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x}) + \beta_{y2}(\beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x}) + \epsilon_{y} \)</span></p>
+</div>
+</section>
 </section>
 <section id="neural-network-design">
 <h2>Neural Network Design<a class="headerlink" href="#neural-network-design" title="Permalink to this headline">#</a></h2>
 <p>The following diagram shows a single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.</p>
-<img src="images/nn_diag_1.jpg" width=400 height=400 style="margin:auto"/><p>If you have worked with neural networks before, you have almost certainly seen a diagram like this used to explain what is going on underneath the hood. The aim of the following sections is to systematically break down this diagram using examples and interpretations to form an intuitive understanding of what these bubbles represent.</p>
-<section id="motivation">
-<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h3>
-<p>We have established that in order to model a complex decision process such as image recognition it is essential to decompose the problem into sub-problems to find suitable answers and compose a solution.</p>
-<p>In your usage of statistics thus far you have learned about a variety of methods through which you can model results, such as ordinary least squares. Why can’t we simply use ordinary least squares, with the variables equal to each of the “sub-problems” (characteristics) we investigate?</p>
-<p>Let’s continue with this premise and understand the results through an example.</p>
-<p>Ordinary Least Squares (OLS) equation:<br>
-<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x + \epsilon \)</span></p>
-<p>Remember that in an OLS equation, each predictor variable (x) has an estimated coefficient that can be interpretted using the units of the predictor variable and target variable (y) to interpret the impact of that input on the prediction of the target variable. We will use this property of OLS to connect the interpretation of variable importance to usage of OLS to analyse decomposed predictors, which will illustrate the necessity of neural network architectures for the analysis of nested predictors.</p>
-<p>Let’s return to the cat example. Recall the tree diagram of our “predictor variables” that led us to the conclusion that “This cat is cute”:</p>
-<img src="images/cat_diagram_1.png" width=500 height=500 style="margin:auto"/><p>We will use this diagram to inform our OLS regression model which will predict a cat’s “cuteness score” based on various predictor variables. Below is a section of the diagram which is completed and will serve as the basis for our example.</p>
-<img src="images/cat_diagram_2.png" width=500 height=500 style="margin:auto"/><p>In order to understand this image classification without diving into the root of convolutional neural networks (CNN’s) and the intricacies of CNN network design in order to explain how features are derived from the picture in the first place, we will instead understand this image as if the image has an associated “score” for each variable we identify. This will simplify our problem immensely by removing the necessity to derive these variable “scores”, and lends itself to the OLS interpretation we are looking for.</p>
-<p>For the diagram above, we interpret the boxes to represent random variables. Forming a linear equation using the highest two layers of the tree diagram, we generate the following equation:</p>
-<blockquote>
-<div><p><strong>Cuteness Score = Fur Color Score  + Surprised Expression Score</strong></p>
-</div></blockquote>
-<table>
-  <tr>
-    <th>Variable</th>
-    <th>Data Type</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>Cuteness Score</td>
-    <td>float between 0 and 1</td>
-    <td>The value 1 represents the "cutest" a cat could possibly be, and <br>the value 0 represents the "least cute" a cat could possibly be.</td>
-  </tr>
-  <tr>
-    <td>Surprised Expression Score</td>
-    <td>float between 0 and 1</td>
-    <td>The value 1 represents the "most surprised" a cat could possibly look, and <br>the value 0 represents the "least surprised" a cat could possibly look.</td>
-  </tr>
-    <tr>
-    <td>Fur Color Score</td>
-    <td>float between 0 and 1</td>
-    <td>The value 1 represents the "best fur color" a cat could possibly have, and <br>the value 0 represents the "worst fur color" a cat could possibly have.</td>
-  </tr>
-</table> <p>The variables above may be thought of as aggregate scores combining physical measurements and human psychology. For example: the size of the cat’s eyes might be measured by the computer through understanding the eye as some eliptical shape, and it’s “wide-ness” might be the difference between the surface area formed by this eplipse and the surface area created by a circle of the same diameter. This, in turn, impacts some computation which weights the various components of</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># maybe do some paper planning so i&#39;m not stumbling over myself in the writing!</span>
-</pre></div>
+<img src="nn_diag_1.jpg" width=400 height=400 style="margin:auto"/><p>If you have worked with neural networks before, you have almost certainly seen a diagram like this used to explain what is going on underneath the hood. The aim of the following sections is to systematically break down this diagram  to explain its components, using the snack example to form an intuitive understanding of what these bubbles represent.</p>
+<section id="input-layer">
+<h3>Input Layer<a class="headerlink" href="#input-layer" title="Permalink to this headline">#</a></h3>
+<p>The input layer of a neural network can vary in dimension based on the problem of interest. For an image, this can be a matrix of numbers, each representing a single pixel value. This layer maintains the originall units of the inputs, because it represents the inputs before any transformations have been applied.</p>
+<p>We will move on to the Snack example to illlustrate this layer in context.</p>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>text</p>
 </div>
+<section id="inside-snack-example-admonition">
+<h4>inside snack example admonition<a class="headerlink" href="#inside-snack-example-admonition" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+<section id="hidden-layer">
+<h3>Hidden Layer<a class="headerlink" href="#hidden-layer" title="Permalink to this headline">#</a></h3>
+<p>The hidden layer is composed ofEach bubble inside the hidden layer (<span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) are called <strong>activationss</strong>.The hidden layer is where a nonlinear transformation is applied to the linear combination of the inputs. This allows the</p>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>text</p>
 </div>
+</section>
+<section id="output-layer">
+<h3>Output Layer<a class="headerlink" href="#output-layer" title="Permalink to this headline">#</a></h3>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>text</p>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NEED FEEDBACK ON THE DIAGRAMS! DO I NEED TO REDRAW THEM ALL????</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How do I utilize the sources?</span>
-<span class="c1"># - cannot directly quote, so how do I represent that I have sourced/verified principles with a textbook?</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Cat Example using OLS:<br></p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\( y \)</span> = “cuteness” rating <br>
-<span class="math notranslate nohighlight">\( \beta_{0} \)</span> = estimated cuteness <br>
-<span class="math notranslate nohighlight">\( \beta_{1} \)</span> = est</p>
-</div></blockquote>
-<p>Or, More generally: <br>
-<span class="math notranslate nohighlight">\( a = a_{1} + a_{2} + a_{3} \)</span> <br>
-<span class="math notranslate nohighlight">\( b = b_{1} + b_{2} + b_{3} \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( y_{a} = \beta_{a0} + \beta_{a1}a_{1} + \beta_{a2}a_{2} + \beta_{a3}a_{3} \)</span> <br>
-<span class="math notranslate nohighlight">\( y_{b} = \beta_{b0} + \beta_{b1}b_{1} + \beta_{b2}b_{2} + \beta_{b3}b_{3} \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{ya}y_{a} + \beta_{yb}y_{b} \)</span> <br>
-<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{ya}(\beta_{a0} + \beta_{a1}a_{1} + \beta_{a2}a_{2} + \beta_{a3}a_{3}) + \beta_{yb}(\beta_{b0} + \beta_{b1}b_{1} + \beta_{b2}b_{2} + \beta_{b3}b_{3}) \)</span></p>
-<p>We can see that this can be rewritten: <br>
-<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{a0} + \beta_{b0} + \beta_{ya}a(\beta_{a1} + \beta_{a2} + \beta_{a3}) + \beta_{yb}b(\beta_{b1} + \beta_{b2} + \beta_{b3}) \)</span> <br></p>
-<p>We can rename: <br>
-<span class="math notranslate nohighlight">\( \beta_{a} = \beta_{a1} + \beta_{a2} + \beta_{a3} \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{b} = \beta_{b1} + \beta_{b2} + \beta_{b3} \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{0} = \beta_{y0} + \beta_{a0} + \beta_{b0} \)</span></p>
-<p><span class="math notranslate nohighlight">\( z = \beta_{0} + \beta_{a}a + \beta_{b}b\)</span></p>
 </section>
 </section>
 </section>
@@ -572,7 +723,7 @@ Why don’t we simply use another modeling framework such as ordinary least squa
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By The Jupyter Book community<br/>
+    By Jonathan Kropko (jkropko@virginia.edu)<br/>
   
       &copy; Copyright 2022.<br/>
 </p>
