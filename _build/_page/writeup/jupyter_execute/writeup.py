@@ -49,16 +49,16 @@ import pandas as pd
 
 # > *Why* do you think this cat is cute? <br>
 # > 1. The cat's fur coloring is pretty
-# 2. The cat looks surprised
-# 3. The cat's nose is cute
+# > 2. The cat looks surprised
+# > 3. The cat's nose is cute
 # 
 # > *Why* do you think the cat's fur coloring is pretty? <br>
 # > 1. The cat's fur coloring is pretty
-#     1. The cat's fur coloring is pretty because the colors are distinct
-#     2. The cat's fur colors form a cool pattern
-#     3. The cat's fur has multiple colors
-# 2. The cat looks surprised
-# 3. The cat's nose is cute
+# >     1. The cat's fur coloring is pretty because the colors are distinct
+# >     2. The cat's fur colors form a cool pattern
+# >     3. The cat's fur has multiple colors
+# > 2. The cat looks surprised
+# > 3. The cat's nose is cute
 # 
 # 
 # > *Why* do these features make the cat's fur coloring pretty? <br>
@@ -74,14 +74,7 @@ import pandas as pd
 
 # This representation of the problem is getting a little hard to read - and there are many questions left unaswered because we have not answered all questions to the same depth. To understand the problem more concisely, we can rewrite these answers in tree diagram, with each box representing an answer and each line representing a question.
 
-# <img src="images/cat_diagram_1.png" width=10000 height=1000 style="margin:auto"/>
-
-# ```{image} /images/cat_diagram_1.png
-# :alt: fishy
-# :class: bg-primary mb-1
-# :width: 1000px
-# :align: center
-# ```
+# <img src="cat_diagram_1.png" width=10000 height=1000 style="margin:auto"/>
 
 # We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.
 
@@ -180,7 +173,8 @@ import pandas as pd
 # :class: bg-primary mb-1
 # :width: 1000px
 # :align: center
-# ```For simplicity, we will say that each snack packet contains 10 of the snack therein.
+# ```
+# For simplicity, we will say that each snack packet contains 10 of the snack therein.
 # | snack packet    | pretzels | corn chips |
 # :-----------|-----|--------:
 # | pretzel snack packet   |  10  |  0  |
