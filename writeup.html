@@ -426,25 +426,24 @@ Vibrant colors are pretty</p>
 <div><p><em>Why</em> do you think this cat is cute? <br></p>
 <ol class="simple">
 <li><p>The cat’s fur coloring is pretty</p></li>
-</ol>
-</div></blockquote>
-<ol class="simple">
 <li><p>The cat looks surprised</p></li>
 <li><p>The cat’s nose is cute</p></li>
 </ol>
+</div></blockquote>
 <blockquote>
 <div><p><em>Why</em> do you think the cat’s fur coloring is pretty? <br></p>
 <ol class="simple">
-<li><p>The cat’s fur coloring is pretty
-1. The cat’s fur coloring is pretty because the colors are distinct
-2. The cat’s fur colors form a cool pattern
-3. The cat’s fur has multiple colors</p></li>
-</ol>
-</div></blockquote>
+<li><p>The cat’s fur coloring is pretty</p>
 <ol class="simple">
+<li><p>The cat’s fur coloring is pretty because the colors are distinct</p></li>
+<li><p>The cat’s fur colors form a cool pattern</p></li>
+<li><p>The cat’s fur has multiple colors</p></li>
+</ol>
+</li>
 <li><p>The cat looks surprised</p></li>
 <li><p>The cat’s nose is cute</p></li>
 </ol>
+</div></blockquote>
 <blockquote>
 <div><p><em>Why</em> do these features make the cat’s fur coloring pretty? <br></p>
 <ol class="simple">
@@ -466,8 +465,7 @@ Vibrant colors are pretty</p>
 </ol>
 </div></blockquote>
 <p>This representation of the problem is getting a little hard to read - and there are many questions left unaswered because we have not answered all questions to the same depth. To understand the problem more concisely, we can rewrite these answers in tree diagram, with each box representing an answer and each line representing a question.</p>
-<img src="images/cat_diagram_1.png" width=10000 height=1000 style="margin:auto"/><a class="bg-primary mb-1 reference internal image-reference" href="images/cat_diagram_1.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/cat_diagram_1.png" style="width: 1000px;" /></a>
-<p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
+<img src="cat_diagram_1.png" width=10000 height=1000 style="margin:auto"/><p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>We <em>chose</em> to ask 3 questions of every conclusion we came to when deciding that “this cat is cute”. This is an arbitrary choice, and thus we might ask an arbitrary number of questions of such a conclusion, resulting in an arbitrarily large number of variables.</p>
@@ -545,6 +543,47 @@ Vibrant colors are pretty</p>
 </tbody>
 </table>
 <p>In this world there are two types of snack packets; one containing only pretzels, and the other containing only corn chips.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/nn_diag_2.png" style="width: 1000px;" /></a>
+<p>For simplicity, we will say that each snack packet contains 10 of the snack therein.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>snack packet</p></th>
+<th class="head"><p>pretzels</p></th>
+<th class="text-align:right head"><p>corn chips</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>pretzel snack packet</p></td>
+<td><p>10</p></td>
+<td class="text-align:right"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>corn chip snack packet</p></td>
+<td><p>0</p></td>
+<td class="text-align:right"><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<p>We might then express these relationships through the following variables and equations:</p>
+<p><span class="math notranslate nohighlight">\(x\)</span>: ingredients <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(x_{1}\)</span> = wheat <br>
+<span class="math notranslate nohighlight">\(x_{2}\)</span> = corn <br></p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(y\)</span>: snacks <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = pretzel <br>
+<span class="math notranslate nohighlight">\(y_{2}\)</span> = corn chip</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\( y_{1} = 4x_{1} + 1x_{2} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 1x_{1} + 4x_{2} \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\(z\)</span> = snack packets <br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(z_{1}\)</span> = pretzel snack packet <br>
+<span class="math notranslate nohighlight">\(z_{2}\)</span> = corn chip snack packet</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\( z_{1} = 10y_{1} + 0y_{2} \)</span> <br>
+<span class="math notranslate nohighlight">\( z_{2} = 0y_{1} + 10y_{2} \)</span> <br></p>
+<p>You have a snack packet, but do not know what type of snack it contains. The label of the packet is obscured, and the snacks inside have been crushed so you cannot tell what the original snack was. You must now find out which type of snack packet you have from the amount of corn and wheat in the resulting ingredient mixture. We can think of these units as “one gram of wheat,” or “one gram of corn,” and say that you somehow sift the mixture to weight these ingredients.</p>
 </div>
 <p>You might then think to yourself: <br>
 Why don’t we simply use another modeling framework such as ordinary least squares (OLS)? Can’t OLS understand the imacts of different predictors on the predicted value?</p>
