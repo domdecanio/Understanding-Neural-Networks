@@ -231,7 +231,7 @@ import pandas as pd
 # In order to answer this question using the OLS approach, we will set a threshold value and predict using a base case. To maintain a grounding in the interpretation of this approach, we will expand on the approach's interpretation as it develops.
 # 
 # Recall that this example begins with a pile of ingredients
-# ###### image (all mixed)
+# > image (all mixed)
 # 
 # Representing this example using the OLS approach, our two input variables will be: <br>
 # > $x_{1}$ = wheat <br>
@@ -271,22 +271,20 @@ import pandas as pd
 # 
 # Given these snack scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack type based on its ingredients we will classify the snack as a "pretzel" when the snack score is less than zero and as a "corn chip" when the snack score is greater than zero.
 # 
-# 
-# ````
-
 # ```{admonition} Note
 # :class: note
 # The values of $\beta_{0}$ and $\epsilon$ are not influential here beacuse we are interested in the difference of the snack score ($y$) between observations of pretzels and corn chips. Therefore, the intercept and error term can be any values, as they will simply shift the center of these clusters.
 # 
 # The values of the coefficients of $x_{1}$ and $x_{2}$ must have different signs, otherwise the snack score ($y$) of both pretzels and corn chips will be the same. This phenomena occurs because each snack has only teo ingredients and the same total amount of ingredients. Therefore only on of $x_{1}$ or $x_{2}$ is necessary to determine the difference between clusters because the quanitity of one ingredient describes the proportion of the snack that is comprised of both.
 # ```
+# ````
 
 # Now that we have described the application of OLS to the snack problem for classifying each snack, we can build on this foundation to desccribe the full problem. We will proceed by describing the model that will use this OLS classification framework to make a prediction of the snack packet type rather than the snack type.
 
 # ````{topic} Snack Example
 # 
 # We have determined clusters of snacks in order to predict what type of snack is present. Now that we have predicted which snack is present, we want to make a decision on the type of snack packet we have using this information. 
-# ###### pile of pretzels / corn chips
+# > pile of pretzels / corn chips
 # 
 # Representing this example using the OLS approach, our two input variables will be: <br>
 # > $y_{1}$ = pretzel <br>
@@ -350,7 +348,7 @@ import pandas as pd
 
 # The following diagram shows a single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.
 
-# <img src="nn_diag_1.jpg" width=400 height=400 style="margin:auto"/>
+# <img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/nn_diag_1.jpg?raw=true" width=400 height=400 style="margin:auto"/>
 
 # If you have worked with neural networks before, you have almost certainly seen a diagram like this used to explain what is going on underneath the hood. The aim of the following sections is to systematically break down this diagram  to explain its components, using the snack example to form an intuitive understanding of what these bubbles represent.
 
