@@ -629,17 +629,17 @@ Why don’t we simply use another modeling framework such as ordinary least squa
 <span class="math notranslate nohighlight">\( y =  -.5 + 2 \)</span> <br>
 <span class="math notranslate nohighlight">\( y = 1.5 \)</span> <br></p>
 <p>Given these snack scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack type based on its ingredients we will classify the snack as a “pretzel” when the snack score is less than zero and as a “corn chip” when the snack score is greater than zero.</p>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>The values of <span class="math notranslate nohighlight">\(\beta_{0}\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> are not influential here beacuse we are interested in the difference of the snack score (<span class="math notranslate nohighlight">\(y\)</span>) between observations of pretzels and corn chips. Therefore, the intercept and error term can be any values, as they will simply shift the center of these clusters.</p>
-<p>The values of the coefficients of <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> must have different signs, otherwise the snack score (<span class="math notranslate nohighlight">\(y\)</span>) of both pretzels and corn chips will be the same. This phenomena occurs because each snack has only teo ingredients and the same total amount of ingredients. Therefore only on of <span class="math notranslate nohighlight">\(x_{1}\)</span> or <span class="math notranslate nohighlight">\(x_{2}\)</span> is necessary to determine the difference between clusters because the quanitity of one ingredient describes the proportion of the snack that is comprised of both.</p>
-</div>
 </section>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
 <p>Our question of interest is: “What type of snack packet do we have?” <br>
 In order to answer this question using the OLS approach, we will set a threshold value and predict using a base case. To maintain a grounding in the interpretation of this approach, we will expand on the approach’s interpretation as it develops.</p>
 <p>Recall that this example begins with a pile of ingredients</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The values of <span class="math notranslate nohighlight">\(\beta_{0}\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> are not influential here beacuse we are interested in the difference of the snack score (<span class="math notranslate nohighlight">\(y\)</span>) between observations of pretzels and corn chips. Therefore, the intercept and error term can be any values, as they will simply shift the center of these clusters.</p>
+<p>The values of the coefficients of <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> must have different signs, otherwise the snack score (<span class="math notranslate nohighlight">\(y\)</span>) of both pretzels and corn chips will be the same. This phenomena occurs because each snack has only teo ingredients and the same total amount of ingredients. Therefore only on of <span class="math notranslate nohighlight">\(x_{1}\)</span> or <span class="math notranslate nohighlight">\(x_{2}\)</span> is necessary to determine the difference between clusters because the quanitity of one ingredient describes the proportion of the snack that is comprised of both.</p>
 </div>
 <p>Now that we have described the application of OLS to the snack problem for classifying each snack, we can build on this foundation to desccribe the full problem. We will proceed by describing the model that will use this OLS classification framework to make a prediction of the snack packet type rather than the snack type.</p>
 <section id="pile-of-pretzels-corn-chips">
