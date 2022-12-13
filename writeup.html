@@ -247,8 +247,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-network-design">
-   Neural Network Design
+  <a class="reference internal nav-link" href="#neural-network-architecture">
+   Neural Network Architecture
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -310,8 +310,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-network-design">
-   Neural Network Design
+  <a class="reference internal nav-link" href="#neural-network-architecture">
+   Neural Network Architecture
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -359,7 +359,7 @@ title="Print to PDF"
 <p>Every day we interact with the world through our senses. When we wake up, we see the sunlight of the morning, we hear the birds chirping, and taste hot coffee. We rely on these sensory inputs to inform our decisionmaking, though this process is often taken for granted. When you get out of bed to put on a fresh cup of coffee, you might not realize that you have already made various decisions before you’ve started the coffee maker: retrieving coffee grounds from your cabinet requires you to decide which cabinet to open, opening your bedroom door requires you to acknowledge your doorknob’s location on your door, and getting out of bed requires that you look at the clock to convince yourself that you <em>really</em> have to wake up now.</p>
 <p>Let’s work with a specific example:
 Consider this cat picture.</p>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg/800px-%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg" width=400 height=400 style="margin:auto"/><p>Source: <a class="reference external" href="https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg">https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:Топа_8.jpg</a></p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/cat.jpg?raw=true" width=400 height=400 style="margin:auto"/><p>Source: <a class="reference external" href="https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:%D0%A2%D0%BE%D0%BF%D0%B0_8.jpg">https://commons.wikimedia.org/wiki/Category:Quality_images_of_cats#/media/File:Топа_8.jpg</a></p>
 <p>When you look at this picture of the cat, you can see that it is cute. Just as before, this is a decision we collectively arrive at after processing the stimulus of this image, a sensory input. To better understand our the subliminal decision-making processes that are required to come to such a conclusion, let us proceed through a set of questions to investigate how this decision was formed.</p>
 <blockquote>
 <div><p><em>Why</em> do you think this cat is cute? <br>
@@ -427,7 +427,7 @@ Vibrant colors are pretty</p>
 </ol>
 </div></blockquote>
 <p>This representation of the problem is getting a little hard to read - and there are many questions left unaswered because we have not answered all questions to the same depth. To understand the problem more concisely, we can rewrite these answers in tree diagram, with each box representing an answer and each line representing a question.</p>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/cat_diagram_1.png?raw=true" width=800 height=400 style="margin:auto"/><p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/cat_diagram_1.png?raw=true" width=800 height=400 style="margin:auto"/><p>We can see that our interpretation of the image relies on many small details of that image coming together to form an overall decision.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>We <em>chose</em> to ask 3 questions of every conclusion we came to when deciding that “this cat is cute”. This is an arbitrary choice, and thus we might ask an arbitrary number of questions of such a conclusion, resulting in an arbitrarily large number of variables.</p>
@@ -484,7 +484,7 @@ Vibrant colors are pretty</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
 <p>We live in a world where there are two types of snacks (pretzels and corn chips) which are each composed of wheat and corn.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/nn_diag_2.png" style="width: 1000px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/nn_diag_2.png" style="width: 1000px;" /></a>
 <p>Each pretzel is made using 4 wheat and 1 corn, and each corn chip is made using 1 wheat and 4 corn.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -505,7 +505,7 @@ Vibrant colors are pretty</p>
 </tbody>
 </table>
 <p>In this world there are two types of snack packets; one containing only pretzels, and the other containing only corn chips.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="images/nn_diag_2.png" style="width: 1000px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/nn_diag_2.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/nn_diag_2.png" style="width: 1000px;" /></a>
 <p>For simplicity, we will say that each snack packet contains 10 of the snack therein.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -644,13 +644,13 @@ In order to answer this question using the OLS approach, we will set a threshold
 <p>Before we illustrate how the coefficients collapse as shown in the <a class="reference external" href="https://domdecanio.github.io/Understanding-Neural-Networks/writeup.html#neural-network-motivation">motivation section</a> we will first define the components of a neural network to develop our understanding of the architecture that causes this collapsing effect.</p>
 </section>
 </section>
-<section id="neural-network-design">
-<h2>Neural Network Design<a class="headerlink" href="#neural-network-design" title="Permalink to this headline">#</a></h2>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/nn_diag_1.jpg?raw=true" width=400 height=400 style="margin:auto"/><p>If you have worked with neural networks before, you have certainly seen a diagram like this used to explain what is going on underneath the hood. The aim of this section is to systematically break down this diagram  to explain its components, using the snack example to form an intuitive understanding of what these bubbles represent.</p>
-<p>The following diagram shows a single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.</p>
+<section id="neural-network-architecture">
+<h2>Neural Network Architecture<a class="headerlink" href="#neural-network-architecture" title="Permalink to this headline">#</a></h2>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_0.png?raw=true" width=400 height=400 style="margin:auto"/><p>The diagram above illustrates the architecture single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.</p>
+<p>The aim of this section is to deompose this diagram using the Snack Example to create an intuitive understanding of neural network architectures. We will concentrate on one layer in each sub-section, following the architecture in the above diagram.</p>
 <section id="input-layer">
 <h3>Input Layer<a class="headerlink" href="#input-layer" title="Permalink to this headline">#</a></h3>
-<p>The input layer of a neural network can vary in dimension based on the problem of interest. For an image, this can be a matrix of numbers, each representing a single pixel value. This layer maintains the originall units of the inputs, because it represents the inputs before any transformations have been applied.</p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_1.png?raw=true" style="margin:auto"/><p>The input layer of a neural network can vary in dimension based on the problem of interest. For an image, this can be a matrix of numbers, each representing a single pixel value. This layer maintains the originall units of the inputs, because it represents the inputs before any transformations have been applied.</p>
 <p>We will move on to the Snack example to illlustrate this layer in context.</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
@@ -659,7 +659,7 @@ In order to answer this question using the OLS approach, we will set a threshold
 </section>
 <section id="hidden-layer">
 <h3>Hidden Layer<a class="headerlink" href="#hidden-layer" title="Permalink to this headline">#</a></h3>
-<p>The hidden layer is composed ofEach bubble inside the hidden layer (<span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) are called <strong>activationss</strong>.The hidden layer is where a nonlinear transformation is applied to the linear combination of the inputs. This allows the</p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_2.png?raw=true" style="margin:auto"/><p>The hidden layer is composed ofEach bubble inside the hidden layer (<span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) are called <strong>activationss</strong>.The hidden layer is where a nonlinear transformation is applied to the linear combination of the inputs. This allows the</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
 <p><strong>Recall</strong> <br>
@@ -692,7 +692,7 @@ Ordinary Least Squares (OLS) equation:<br>
 </section>
 <section id="output-layer">
 <h3>Output Layer<a class="headerlink" href="#output-layer" title="Permalink to this headline">#</a></h3>
-<div class="topic">
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_3.png?raw=true" style="margin:auto"/><div class="topic">
 <p class="topic-title">Snack Example</p>
 <p>text</p>
 </div>
