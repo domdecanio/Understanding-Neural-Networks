@@ -577,114 +577,123 @@ In order to answer this question using the OLS approach, we will set a threshold
 <p>Let’s pause for a moment to understand what this equation <em>means</em>. We saw from the definition of this example that a snack is comprised of inputs wheat and corn. When applied in the correct ratios these inputs can produce snacks of two distinct varieties.</p>
 <p>To undersand this equation we must first understand the context of its prediction. The predicted variable is a <strong>snack score</strong>. This score is a way for us to differentiate between the two snack types, and it is unitless because it defines neither the type of ingredients that comprise it, nor the type of snack that it represents. Because we are taking units of the ingredients as inputs (one gram of wheat/corn) the coefficients to these variables may be thought of as modifying the importance of the ingredient on the snack score. The intercept term can be interpretted as the base snack score when there are zero grams of wheat and zero grams of corn present, and the error term (epsilon) represents the random variation of snack score caused by variations in the measurement of the ingredients.</p>
 <p>Although the snack score does not difinitively identify a specific snack, snacks of the same type will have the same snack score. If we relax the assumption that all snacks of the same type will have the exact same quanitity of each ingredient, we will still see that the the quantities of each ingredient will be similar within each snack type. In both of these situations, we will input the ingredients and output snack scores which can be clustered based on the type of of the underlying snack.</p>
-<p>We might then choose a threshold value between these clusters to transform a predicted snack score into a prediction of the class to which the underlying snack belongs. Let’s work through the given OLS example: <br>
-<span class="math notranslate nohighlight">\( y \)</span>  = snack score <br>
-<span class="math notranslate nohighlight">\( \beta_{x0} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{x1} = 0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{x2} = -0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{x} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( y = \beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x} \)</span> <br>
-<span class="math notranslate nohighlight">\( y = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span></p>
+<p>We might then choose a threshold value between these clusters to transform a predicted snack score into a prediction of the class to which the underlying snack belongs. Let’s work through the given OLS example with arbitrary parameters: <br>
+<span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{1}} = 0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{2}} = -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{1} = \beta_{y_{1},x_{0}} + \beta_{y_{1},x_{1}}x_{1} + \beta_{y_{1},x_{2}}x_{2} + \epsilon_{y_{1},x} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span></p>
 <p>One Pretzel: <br>
-<span class="math notranslate nohighlight">\( y = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( y = 0 + 0.5(4) + -0.5(1) + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( y =  2 + -0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( y = 1.5 \)</span> <br></p>
+<span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5(4) + -0.5(1) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} =  2 + -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = 1.5 \)</span> <br></p>
 <p>One Corn Chip: <br>
-<span class="math notranslate nohighlight">\( y = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( y = 0 + 0.5(1) + -0.5(4) + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( y =  0.5 + -2 \)</span> <br>
-<span class="math notranslate nohighlight">\( y = -1.5 \)</span> <br></p>
+<span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5(1) + -0.5(4) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} =  0.5 + -2 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{1} = -1.5 \)</span> <br></p>
 <p>Given these snack scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack type based on its ingredients we will classify the snack as a “pretzel” when the snack score is less than zero and as a “corn chip” when the snack score is greater than zero.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>The values of <span class="math notranslate nohighlight">\(\beta_{0}\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> are not influential here beacuse we are interested in the difference of the snack score (<span class="math notranslate nohighlight">\(y\)</span>) between observations of pretzels and corn chips. Therefore, the intercept and error term can be any values, as they will simply shift the center of these clusters.</p>
 </div>
+<p>Because our aim is to isolate clusters of the underlying data based on different manipulations of the inputs, we might choose arbitrarily different betas and repeat this process. This will highlight non-obvious clusters that form when different characteristics are targetted by the manipulation.</p>
+<p><span class="math notranslate nohighlight">\( y_{2} \)</span>  = snack score 2<br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{1}} = 0.9 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{2}} = 0.6 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{2} = \beta_{y_{2},x_{0}} + \beta_{y_{2},x_{1}}x_{1} + \beta_{y_{2},x_{2}}x_{2} + \epsilon_{y_{2},x} \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9x_{1} + 0.6x_{2} + 0 \)</span></p>
+<p>One Pretzel: <br>
+<span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9x_{1} + 0.6x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9(4) + 0.6(1) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} =  3.6 + 0.6 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 3.6 \)</span> <br></p>
+<p>One Corn Chip: <br>
+<span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9x_{1} + 0.6x_{2} + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9(1) + 0.6(4) + 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} =  0.9 + 2.4 \)</span> <br>
+<span class="math notranslate nohighlight">\( y_{2} = 3.3 \)</span> <br></p>
+<p>It is clear that here we will choose a different threshold value to differentiate a cluster of pretzels and corn chips, as the pretzel cluster will give a snack score of 3.6 and the corn chip cluster will generate a snack score of 3.3. In this situation a good choice of threshold might be 3.4, splitting the difference between the two clusters. When using the OLS approach to predict the snack type based on its ingredients we will classify the snack as a “pretzel” when the snack score is greater than 3.4 and as a “corn chip” when the snack score is less than 3.4.</p>
 </div>
-<p>Now that we have described the application of OLS to the snack problem for classifying each snack, we can build on this foundation to desccribe the full problem. We will proceed by describing the model that will use this OLS classification framework to make a prediction of the snack packet type rather than the snack type.</p>
+<p>Now that we have described the application of OLS to the snack problem for classifying each snack, we can build on this foundation to describe the full problem. We will proceed by describing the model that will use this OLS classification framework to make a prediction of the snack packet type rather than the snack type.</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
-<p>We have determined clusters of snacks in order to predict what type of snack is present. Now that we have predicted which snack is present, we want to make a decision on the type of snack packet we have using this information.</p>
+<p>Now that we have developed two methods of clustering the input ingredients in order to inform our decision on the type of snack that is present, we will continue by developing a method that utilizes the information generated from both of these clustering methods to cluster snack packets based on the ingredients present.</p>
 <blockquote>
-<div><p>pile of pretzels / corn chips</p>
+<div><p>pile ingredients (divided)
+arrow down (labeled <span class="math notranslate nohighlight">\(y_{1}\)</span> or <span class="math notranslate nohighlight">\(y_{s}\)</span>)
+pretzel or corn chip</p>
 </div></blockquote>
 <p>Representing this example using the OLS approach, our two input variables will be: <br></p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = pretzel <br>
-<span class="math notranslate nohighlight">\(y_{2}\)</span> = corn chip</p>
+<div><p><span class="math notranslate nohighlight">\(y_{1}\)</span> = snack score 1 <br>
+<span class="math notranslate nohighlight">\(y_{2}\)</span> = snack score 2</p>
 </div></blockquote>
 <p>Which yeilds: <br>
-<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span></p>
+<span class="math notranslate nohighlight">\( z = \beta_{y_{0}} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{y} \)</span></p>
 <p>We will proceed by extending the snack score concept to a <strong>snack packet score</strong>, which we will use to describe clusters of snacks within a snack packet. This score will not define a snack packet class, but snack packets of the same type will form clusters which we can then identify using our prior knowledge of the snack packet compositions. Then we will choose a threshold value between these clusters to transform predicted snack scores into a prediction of the class to which the underlying snack packet belongs. The error term at this level is denoted as <span class="math notranslate nohighlight">\(\epsilon_{y}\)</span> for notational clarity.</p>
-<p>We will mirror the structure of the snack score OLS example. The only difference between them is that we are now using snack quantities as our input and packet score as our output. Let’s work through the OLS example: <br>
-<span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br>
-<span class="math notranslate nohighlight">\( \beta_{y0} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y1} = 0.7 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y2} = 0.1 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span></p>
-<p>One Pretzel Packet: <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7(10) + 0.1(0) + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 7 + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 7 \)</span> <br></p>
-<p>One Corn Chip Packet: <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7(0) + 0.1(10) + 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 0 + 1 \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 1 \)</span> <br></p>
-<p>Given these snack packet scores, we might choose a threshold value of 0. When using this OLS approach to predict the snack packet type based on its ingredients we will classify the snack packet as a “pretzel packet” when the snack score is less than zero and as a “corn chip packet” when the snack packet score is greater than zero.</p>
-</div>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>The <strong>snack score</strong> and <strong>snack packet score</strong> are two distinct levels of the same problem.</p>
 </div>
-<p>Now that we have defined the snack example problem in terms of a snack score and snack packet score, we will try to combine these approaches to form a decomposition approach that uses OLS to predict a snack packet directly from the ingredients we take as inputs.</p>
-<p>Before we illustrate how the coefficients collapse as shown in the <a class="reference external" href="https://domdecanio.github.io/Understanding-Neural-Networks/writeup.html#neural-network-motivation">motivation section</a> we will first define the components of a neural network to develop our understanding of the architecture that causes this collapsing effect.</p>
+</div>
+<p>When we work through examples to generate results and create a threshold value, the OLS architecture will fail.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>By definition, “generating results and creating a threshold value” for the snack packet score implicates a nested linear approach: the snack packet score is a linear function of different snack scores and the snack scores are linear functions of the ingredients.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>We will mirror the structure of the snack score OLS example. The only difference between them is that we are now using snack scores as our input and packet score as our output. Let’s work through the OLS example: <br></p>
+<p><span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br></p>
+<p><span class="math notranslate nohighlight">\( \beta_{y_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1}} = 0.7 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2}} = 0.1 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{1}} = 0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{2}} = -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{2} \)</span>  = snack score 2<br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{1}} = 0.9 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{2}} = 0.6 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{y_{0}} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{y} \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span></p>
+</div>
 </section>
 </section>
 <section id="neural-network-architecture">
 <h2>Neural Network Architecture<a class="headerlink" href="#neural-network-architecture" title="Permalink to this headline">#</a></h2>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_0.png?raw=true" width=400 height=400 style="margin:auto"/><p>The diagram above illustrates the architecture single layer neural network (a neural network with only one hidden layer) that has two inputs and one output.</p>
-<p>The aim of this section is to deompose this diagram using the Snack Example to create an intuitive understanding of neural network architectures. We will concentrate on one layer in each sub-section, following the architecture in the above diagram.</p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_0.png?raw=true" width=400 height=400 style="margin:auto"/><p>The diagram above illustrates the architecture of a single layer neural network (a neural network with only one hidden layer).</p>
+<p>The aim of this section is to deompose this diagram using the Snack Example to create an intuitive understanding of neural network architectures. We will concentrate on one layer in each sub-section, following the architecture in the diagram.</p>
 <section id="input-layer">
 <h3>Input Layer<a class="headerlink" href="#input-layer" title="Permalink to this headline">#</a></h3>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_1.png?raw=true" style="margin:auto"/><p>The input layer of a neural network can vary in dimension based on the problem of interest. For an image, this can be a matrix of numbers, each representing a single pixel value. This layer maintains the originall units of the inputs, because it represents the inputs before any transformations have been applied.</p>
-<p>We will move on to the Snack example to illlustrate this layer in context.</p>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_1.png?raw=true" style="margin:auto"/><p>The input layer of a neural network can vary in dimension based on the problem of interest. For classification problems using structured data, this will be a vector like we see above, where each value <span class="math notranslate nohighlight">\(x_{1}\)</span>, <span class="math notranslate nohighlight">\(x_{2}\)</span> is a predictor variable that may assist the classification. For an image, this input layer can be a matrix of numbers, each representing a single pixel value. The input layer maintains the original units of the inputs because it represents the inputs before any transformations have been applied.</p>
+<p>We will move on to the Snack example to illustrate this layer concretely.</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
-<p>text</p>
+<p>For the snack example, <a class="reference external" href="https://domdecanio.github.io/Understanding-Neural-Networks/writeup.html#example">recall</a> that we are given a pile of ingredients and we are asked to classify the ingredients as originating from a “pretzel snack packet” or a “corn chip snack packet”. The original input that we have is the mixed pile of ingredients:</p>
+<blockquote>
+<div><p>ingredients mixed</p>
+</div></blockquote>
+<p>But we sift them into two piles-corn and wheat:</p>
+<blockquote>
+<div><p>ingredients sorted</p>
+</div></blockquote>
+<p>Therefore a valid vector of inputs for this example is: (4, 1). The 4 indicates the quantity of wheat, and the 1 indicates the quantity of corn. Both are inputs to the neural network, and together they compose a single “input” or “observation”.</p>
 </div>
 </section>
 <section id="hidden-layer">
 <h3>Hidden Layer<a class="headerlink" href="#hidden-layer" title="Permalink to this headline">#</a></h3>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_2.png?raw=true" style="margin:auto"/><p>The hidden layer is composed ofEach bubble inside the hidden layer (<span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) are called <strong>activationss</strong>.The hidden layer is where a nonlinear transformation is applied to the linear combination of the inputs. This allows the</p>
-<div class="topic">
-<p class="topic-title">Snack Example</p>
-<p><strong>Recall</strong> <br>
-Ordinary Least Squares (OLS) equation:<br>
-<span class="math notranslate nohighlight">\( y = \beta_{0} + \beta_{1}x + \epsilon \)</span></p>
-<p>Snack Score = <span class="math notranslate nohighlight">\( y = \beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x} \)</span> <br></p>
-<p>Snack Packet Score = <span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}y_{1} + \beta_{y2}y_{2} + \epsilon_{y} \)</span></p>
-<p>Combined approach: <br>
-<span class="math notranslate nohighlight">\( z = \beta_{y0} + \beta_{y1}(\beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x}) + \beta_{y2}(\beta_{x0} + \beta_{x1}x_{1} + \beta_{x2}x_{2} + \epsilon_{x}) + \epsilon_{y} \)</span></p>
-<p>Plugging in values
-<span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br>
-<span class="math notranslate nohighlight">\( \beta_{y0} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y1} = 0.7 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y2} = 0.1 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( y \)</span>  = snack score <br>
-<span class="math notranslate nohighlight">\( \beta_{x0} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{x1} = 0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{x2} = -0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{x} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( z = 0 + 0.7(0 + 0.5x_{1} + -0.5x_{2} + 0) + 0.1(0 + 0.5x_{1} + -0.5x_{2} + 0) + 0 \)</span>
-<span class="math notranslate nohighlight">\( z = (0.35x_{1} + -0.35x_{2}) + (0.05x_{1} + -0.05x_{2}) \)</span>
-<span class="math notranslate nohighlight">\( z = 0.4x_{1} -0.3x_{2} \)</span></p>
-<p>Now we see how a combination of linear equations collapses, as we first explored in the <a class="reference external" href="https://domdecanio.github.io/Understanding-Neural-Networks/writeup.html#neural-network-motivation">motivation section</a>. Although</p>
-</div>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_2.png?raw=true" style="margin:auto"/><p>The hidden layer is composed of each bubble inside the hidden layer (<span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) are called <strong>activations</strong>. The hidden layer is where a nonlinear transformation is applied to the linear combination of the inputs. This allows the</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
 <p>text</p>
