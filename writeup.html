@@ -579,11 +579,11 @@ In order to answer this question using the OLS approach, we will set a threshold
 <p>Although the snack score does not difinitively identify a specific snack, snacks of the same type will have the same snack score. If we relax the assumption that all snacks of the same type will have the exact same quanitity of each ingredient, we will still see that the the quantities of each ingredient will be similar within each snack type. In both of these situations, we will input the ingredients and output snack scores which can be clustered based on the type of of the underlying snack.</p>
 <p>We might then choose a threshold value between these clusters to transform a predicted snack score into a prediction of the class to which the underlying snack belongs. Let’s work through the given OLS example with arbitrary parameters: <br>
 <span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
-<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{0,y_{1}} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{1},x_{1}} = 0.5 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{1},x_{2}} = -0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( y_{1} = \beta_{y_{1},x_{0}} + \beta_{y_{1},x_{1}}x_{1} + \beta_{y_{1},x_{2}}x_{2} + \epsilon_{y_{1},x} \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1}} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{1} = \beta_{0,y_{1}} + \beta_{y_{1},x_{1}}x_{1} + \beta_{y_{1},x_{2}}x_{2} + \epsilon_{y_{1}} \)</span> <br>
 <span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span></p>
 <p>One Pretzel: <br>
 <span class="math notranslate nohighlight">\( y_{1} = 0 + 0.5x_{1} + -0.5x_{2} + 0 \)</span> <br>
@@ -602,11 +602,11 @@ In order to answer this question using the OLS approach, we will set a threshold
 </div>
 <p>Because our aim is to isolate clusters of the underlying data based on different manipulations of the inputs, we might choose arbitrarily different betas and repeat this process. This will highlight non-obvious clusters that form when different characteristics are targetted by the manipulation.</p>
 <p><span class="math notranslate nohighlight">\( y_{2} \)</span>  = snack score 2<br>
-<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{0,y_{2}} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{2},x_{1}} = 0.9 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{2},x_{2}} = 0.6 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( y_{2} = \beta_{y_{2},x_{0}} + \beta_{y_{2},x_{1}}x_{1} + \beta_{y_{2},x_{2}}x_{2} + \epsilon_{y_{2},x} \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{2}} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{2} = \beta_{0,y_{2}} + \beta_{y_{2},x_{1}}x_{1} + \beta_{y_{2},x_{2}}x_{2} + \epsilon_{y_{2}} \)</span> <br>
 <span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9x_{1} + 0.6x_{2} + 0 \)</span></p>
 <p>One Pretzel: <br>
 <span class="math notranslate nohighlight">\( y_{2} = 0 + 0.9x_{1} + 0.6x_{2} + 0 \)</span> <br>
@@ -635,7 +635,7 @@ pretzel or corn chip</p>
 <span class="math notranslate nohighlight">\(y_{2}\)</span> = snack score 2</p>
 </div></blockquote>
 <p>Which yeilds: <br>
-<span class="math notranslate nohighlight">\( z = \beta_{y_{0}} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{y} \)</span></p>
+<span class="math notranslate nohighlight">\( z = \beta_{0,z} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{z} \)</span></p>
 <p>We will proceed by extending the snack score concept to a <strong>snack packet score</strong>, which we will use to describe clusters of snacks within a snack packet. This score will not define a snack packet class, but snack packets of the same type will form clusters which we can then identify using our prior knowledge of the snack packet compositions. Then we will choose a threshold value between these clusters to transform predicted snack scores into a prediction of the class to which the underlying snack packet belongs. The error term at this level is denoted as <span class="math notranslate nohighlight">\(\epsilon_{y}\)</span> for notational clarity.</p>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
@@ -651,20 +651,20 @@ pretzel or corn chip</p>
 <p class="topic-title">Snack Example</p>
 <p>We will mirror the structure of the snack score OLS example. The only difference between them is that we are now using snack scores as our input and packet score as our output. Let’s work through the OLS example: <br></p>
 <p><span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br></p>
-<p><span class="math notranslate nohighlight">\( \beta_{y_{0}} = 0 \)</span> <br>
+<p><span class="math notranslate nohighlight">\( \beta_{0,z} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{1}} = 0.7 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{2}} = 0.1 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y} = 0 \)</span> <br></p>
+<span class="math notranslate nohighlight">\( \epsilon_{z} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
-<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{0,y_{1}} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{1},x_{1}} = 0.5 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{1},x_{2}} = -0.5 \)</span> <br>
 <span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( y_{2} \)</span>  = snack score 2<br>
-<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{0}} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{0,y_{2}} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{2},x_{1}} = 0.9 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{y_{2},x_{2}} = 0.6 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{2}} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( z = \beta_{y_{0}} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{y} \)</span> <br>
 <span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span></p>
 </div>
