@@ -684,10 +684,10 @@ pretzel or corn chip</p>
 <p><span class="math notranslate nohighlight">\( z = (0.035x_{1} + -0.035x_{2}) + (0.09x_{1} + 0.06x_{2}) \)</span> <br>
 <span class="math notranslate nohighlight">\( z = 0.125x_{1} + 0.025x_{2} \)</span></p>
 <p>As we can see, this linear architecture causes the two distinct cluster isolating functions (<span class="math notranslate nohighlight">\(y_{1}\)</span>, <span class="math notranslate nohighlight">\(y_{2}\)</span>) to be condensed into one larger function which is determined through a simple weighted sum approach, where the coefficients <span class="math notranslate nohighlight">\(\beta_{y_{1}}\)</span> and <span class="math notranslate nohighlight">\(\beta_{y_{1}}\)</span> serve as weights. Because of this, our initial interpretation of clustering does not hold.</p>
-<p>Our conjecture stated that the variables <span class="math notranslate nohighlight">\(y_{1}\)</span> and <span class="math notranslate nohighlight">\(y_{2}\)</span> were snack scores, and that <span class="math notranslate nohighlight">\(z\)</span> was a snack packet score. After the linear functions collapse, however, we are left with the function:</p>
+<p>Our conjecture stated that the variables <span class="math notranslate nohighlight">\(y_{1}\)</span> and <span class="math notranslate nohighlight">\(y_{2}\)</span> were snack scores, and that <span class="math notranslate nohighlight">\(z\)</span> was a snack packet score. After the linear functions collapse, however, we are left with the function: <br></p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\( z = 0.125x_{1} + 0.025x_{2} \)</span>
-which is simply a different snack score function! Notice the similarity between this function and  our other snack score functions, as we have <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> as variables.
+<div><p><span class="math notranslate nohighlight">\( z = 0.125x_{1} + 0.025x_{2} \)</span> <br>
+which is simply a different snack score function! Notice the similarity between this function and  our other snack score functions, as we have <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> as variables. <br>
 <span class="math notranslate nohighlight">\( y_{1} = 0.5x_{1} + -0.5x_{2} \)</span> <br>
 <span class="math notranslate nohighlight">\( y_{2} = 0.9x_{1} + 0.6x_{2} \)</span> <br></p>
 </div></blockquote>
@@ -698,6 +698,7 @@ which is simply a different snack score function! Notice the similarity between 
 <h2>Neural Network Architecture<a class="headerlink" href="#neural-network-architecture" title="Permalink to this headline">#</a></h2>
 <img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_0.png?raw=true" width=650 height=650 style="margin:auto"/><p>The diagram above illustrates the architecture of a single layer neural network (a neural network with only one hidden layer).</p>
 <p>The aim of this section is to deompose this diagram using the Snack Example to create an intuitive understanding of neural network architectures. We will concentrate on one layer in each sub-section, following the architecture in the diagram.</p>
+<p>We will generally create a training and testing set to train the neural network, which gives us the benefit of having the correct labels for the observation in the training set. With this information we will use backpropagation to determine the coefficients for each linear combination in order to best cluster input observations based on the correct classifications (or values) and the features of the input data. For this section we will set aside the complexities of neural network training and take as given that we are working with a trained network and we that we know the coefficients this optimized network has chosen through training.</p>
 <section id="input-layer">
 <h3>Input Layer<a class="headerlink" href="#input-layer" title="Permalink to this headline">#</a></h3>
 <img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_1.png?raw=true" width=650 height=650 style="margin:auto"/><p>The input layer of a neural network can vary in dimension based on the problem of interest. For classification problems using structured data, this will be a vector like we see above, where each value <span class="math notranslate nohighlight">\(x_{1}\)</span>, <span class="math notranslate nohighlight">\(x_{2}\)</span> is a predictor variable that may assist the classification. For an image, this input layer can be a matrix of numbers, each representing a single pixel value. The input layer maintains the original units of the inputs because it represents the inputs before any transformations have been applied.</p>
@@ -723,15 +724,11 @@ which is simply a different snack score function! Notice the similarity between 
 <p>Don’t worry! It’s more digestable than it seems.</p>
 <p>Each unique linear combination of the input data is passed though an nonlinear transformation, resulting in some scalar valued output. This set of operations is referred to as an <strong>activation</strong>. Multiple activations (bubbles labelled <span class="math notranslate nohighlight">\(A_{1}\)</span>, <span class="math notranslate nohighlight">\(A_{2}\)</span>, <span class="math notranslate nohighlight">\(A_{3}\)</span>) compose one hidden layer. The nonlinear transformation used in this process is called the <strong>activation function</strong>.</p>
 <p>There are many examples of activation functions. The historically favored choice was the <strong>sigmoid</strong> activation function, because it converts any real number into a value between -1 and 1 and it is easily calculated. It is compelling from a theoretical perspective because it allows for negative response, and has advantageous statistical properties. The <strong>rectified linear activation unit</strong>, or <strong>RELU</strong> activation function is a modern activation function that has been found to perform well empirically despite it’s counterintuitive design. Whereas the sigmoid function transforms the input using the logit, the RELU activation function simply takes the maximum of the input and zero. If the input is less than zero the RELU outputs 0, and if the input is greater than zero the RELU returns the inputted value.</p>
+<p>The introduction of nonlinearity at this point forces the evaluation of each linear combination of inputs before they are analyzed at a higher level by yet another linear function. This maintains the independence between functions, allowing them to specialize in identifying clusters using different characteristics of the inputs.</p>
 <p>To demonstrate the impact of nonlinearity on the network’s function, we will again look to the snack example.</p>
 <div class="topic">
 <p class="topic-title">Snack Example</p>
-<p>We will proceed with the snack packet prediction, with the only change being the inclusion of an activation function inside the snack score step.</p>
-<p><span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br>
-<span class="math notranslate nohighlight">\( \beta_{0,z} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{1}} = 0.7 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{2}} = 0.1 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{z} = 0 \)</span> <br></p>
+<p>We will proceed with the snack packet prediction, with the only change being the inclusion of an activation function inside the snack score step. Because the activations lie in the calculation of the snack scores, we will halt our analysis here.</p>
 <p><span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
 <span class="math notranslate nohighlight">\( \beta_{0,y_{1}} = 0 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{x_{1},y_{1}} = 0.5 \)</span> <br>
@@ -742,6 +739,24 @@ which is simply a different snack score function! Notice the similarity between 
 <span class="math notranslate nohighlight">\( \beta_{x_{1},y_{2}} = 0.9 \)</span> <br>
 <span class="math notranslate nohighlight">\( \beta_{x_{2},y_{2}} = 0.6 \)</span> <br>
 <span class="math notranslate nohighlight">\( \epsilon_{y_{2}} = 0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( y_{1} = (\beta_{0,y_{1}} + \beta_{x_{1},y_{1}}x_{1} + \beta_{x_{2},y_{1}}x_{2} + \epsilon_{y_{1}})_{+}
+\)</span> y_{2} = (\beta_{0,y_{2}} + \beta_{x_{1},y_{2}}x_{1} + \beta_{x_{2},y_{2}}x_{2} + \epsilon_{y_{2}})_{+}</p>
+<p>We can see from these functions <span class="math notranslate nohighlight">\(y_{1}\)</span> and <span class="math notranslate nohighlight">\(y_{2}\)</span> that they cannot be easily combined. If added together, we would not be able to distribute out coefficients or combine like terms within the activation functions because they are contained within the nonlinear RELU functions.</p>
+</div>
+</section>
+<section id="output-layer">
+<h3>Output Layer<a class="headerlink" href="#output-layer" title="Permalink to this headline">#</a></h3>
+<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_3.png?raw=true" width=650 height=650 style="margin:auto"/><p>The purpose of the output layer is to combine the activations from the hidden layer. This is accomplished through a combination of the activation function results. Generally, the result of this combination step will be a continuous value which must be interpretted correctly and further manipulated to apply to the problem.</p>
+<p>The output layer of a neural network can consist of one or more scalar outputs. Just as the input space, the output space is determined by the problem at hand. For standard classification problems using labeled data, the output of a neural network might be a single continuous value which we will use to create classifications by developing a threshold value and classification rule. Alternatively, we might use the same labeled data to predict a set of variables relating to the observation after being provided with a set of observed variables. In this case we will have a set of output variables.</p>
+<p>Regardless of the number of outputs in the output layer, they will require interpretation based on the form of the input data and problem.</p>
+<div class="topic">
+<p class="topic-title">Snack Example</p>
+<p>The snack example inplementation of the output layer is found in the calculation of the snack packet score. Here we will conclude the implementation of neural network architecture for the snack packet prediction.</p>
+<p><span class="math notranslate nohighlight">\( z \)</span> = snack packet score <br>
+<span class="math notranslate nohighlight">\( \beta_{0,z} = 0 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{1}} = 0.7 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{y_{2}} = 0.1 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{z} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( z = \beta_{0,z} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{z} \)</span> <br>
 <span class="math notranslate nohighlight">\( z = \beta_{0,z} + 
       \beta_{y_{1}}(\beta_{0,y_{1}} + \beta_{x_{1},y_{1}}x_{1} + \beta_{x_{2},y_{1}}x_{2} + \epsilon_{y_{1}})_{+} + 
@@ -754,14 +769,7 @@ which is simply a different snack score function! Notice the similarity between 
       0 \)</span> <br>
 $ z = 0.7(0.5x_{1} + -0.5x_{2})<em>{+} +
 0.1(0.9x</em>{1} + 0.6x_{2})_{+}</p>
-<p>Notice that we cannot reduce this equation further! Because of the added nonlinearity, we are required to calculate snack score 1 and snack score 2 <em>before</em> calculating the snack packet score. This ensures that there is no mixing between the linear combinations, and assures us that the two combinations are independently evaluating the inputs to identify clusters.</p>
-</div>
-</section>
-<section id="output-layer">
-<h3>Output Layer<a class="headerlink" href="#output-layer" title="Permalink to this headline">#</a></h3>
-<img src="https://github.com/domdecanio/Understanding-Neural-Networks/blob/main/images/nn_diag_3.png?raw=true" width=650 height=650 style="margin:auto"/><div class="topic">
-<p class="topic-title">Snack Example</p>
-<p>text</p>
+<p>Again notice that we cannot reduce this equation further! Because of the added nonlinearity, we are required to calculate snack score 1 and snack score 2 <em>before</em> calculating the snack packet score. This ensures that there is no mixing between the linear combinations, and assures us that the two combinations are independently evaluating the inputs to identify clusters.</p>
 </div>
 </section>
 </section>
