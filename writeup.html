@@ -657,16 +657,26 @@ pretzel or corn chip</p>
 <span class="math notranslate nohighlight">\( \epsilon_{z} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( y_{1} \)</span>  = snack score 1<br>
 <span class="math notranslate nohighlight">\( \beta_{0,y_{1}} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{1}} = 0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{1},x_{2}} = -0.5 \)</span> <br>
-<span class="math notranslate nohighlight">\( \epsilon_{y_{1},x} = 0 \)</span> <br></p>
+<span class="math notranslate nohighlight">\( \beta_{x_{1},y_{1}} = 0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x_{2},y_{1}} = -0.5 \)</span> <br>
+<span class="math notranslate nohighlight">\( \epsilon_{y_{1}} = 0 \)</span> <br></p>
 <p><span class="math notranslate nohighlight">\( y_{2} \)</span>  = snack score 2<br>
 <span class="math notranslate nohighlight">\( \beta_{0,y_{2}} = 0 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{1}} = 0.9 \)</span> <br>
-<span class="math notranslate nohighlight">\( \beta_{y_{2},x_{2}} = 0.6 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x_{1},y_{2}} = 0.9 \)</span> <br>
+<span class="math notranslate nohighlight">\( \beta_{x_{2},y_{2}} = 0.6 \)</span> <br>
 <span class="math notranslate nohighlight">\( \epsilon_{y_{2}} = 0 \)</span> <br></p>
-<p><span class="math notranslate nohighlight">\( z = \beta_{y_{0}} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{y} \)</span> <br>
-<span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span></p>
+<p><span class="math notranslate nohighlight">\( z = \beta_{0,z} + \beta_{y_{1}}y_{1} + \beta_{y_{2}}y_{2} + \epsilon_{z} \)</span> <br>
+<span class="math notranslate nohighlight">\( z = \beta_{0,z} + 
+      \beta_{y_{1}}(\beta_{0,y_{1}} + \beta_{x_{1},y_{1}}x_{1} + \beta_{x_{2},y_{1}}x_{2} + \epsilon_{y_{1}}) + 
+      \beta_{y_{2}}(\beta_{0,y_{2}} + \beta_{x_{1},y_{2}}x_{1} + \beta_{x_{2},y_{2}}x_{2} + \epsilon_{y_{2}}) + 
+      \epsilon_{z} \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( z = 0 + 0.7y_{1} + 0.1y_{2} + 0 \)</span>
+<span class="math notranslate nohighlight">\( z = 0 + 
+      0.7(0 + 0.5x_{1} + -0.5x_{2} + 0) + 
+      0.1(0 + 0.9x_{1} + 0.6x_{2} + 0) + 
+      0 \)</span> <br></p>
+<p><span class="math notranslate nohighlight">\( z = (0.035x_{1} + -0.035x_{2}) + (0.09x_{1} + 0.06x_{2}) \)</span> <br>
+<span class="math notranslate nohighlight">\( z = 0.125x_{1} + 0.025x_{2} \)</span></p>
 </div>
 </section>
 </section>
